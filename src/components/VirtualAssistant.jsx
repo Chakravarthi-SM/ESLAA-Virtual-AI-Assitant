@@ -237,7 +237,7 @@ const VirtualAssitant = () => {
           {/* Background glow effect */}
           <div className="absolute -inset-8 bg-gradient-to-r from-cyan-400/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-3xl opacity-60 animate-pulse"></div>
 
-          <span className="relative bg-gradient-to-r from-cyan-400 to-pink-500 text-[2vmax] bg-clip-text text-transparent font-bold ">
+          <span className="relative bg-gradient-to-r from-cyan-400 to-pink-500 text-2xl  md:text-[2.2vmax] bg-clip-text text-transparent font-bold mt-10">
             I'm ESLAA, Your Advanced Virtual Assistant
           </span>
 
@@ -264,7 +264,7 @@ const VirtualAssitant = () => {
                 setResponse(false);
                 recognition.start();
               }}
-              className="group relative w-55 h-10 flex items-center justify-center gap-5 text-xl rounded-[20px] border-none cursor-pointer bg-cyan-400 shadow-[2px_2px_50px_rgb(79,224,234)] text-black font-semibold hover:scale-105 transition-transform duration-200 overflow-hidden"
+              className="group relative w-55 h-10 flex items-center justify-center gap-5  text-[17px] md:text-xl rounded-[20px] border-none cursor-pointer bg-cyan-400 shadow-[2px_2px_50px_rgb(79,224,234)] text-black font-semibold hover:scale-105 transition-transform duration-200 overflow-hidden"
             >
               {/* Multiple layer effects */}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -289,7 +289,7 @@ const VirtualAssitant = () => {
                   {/* Microphone glow */}
                   <div className="absolute inset-0 bg-white/40 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
-                <span className="font-semibold tracking-wider">
+                <span className="md:font-semibold tracking-wider">
                   Talk to Eslaa
                 </span>
               </span>
@@ -335,14 +335,6 @@ const VirtualAssitant = () => {
                     alt="Loading"
                     className="w-25 h-auto relative z-10"
                   />
-
-                  {/* Processing indicator */}
-                  {/* <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-2 px-4 py-1 bg-cyan-400/20 rounded-full border border-cyan-400/30 backdrop-blur-sm">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-                    <span className="text-cyan-400 text-xs font-medium tracking-wider">
-                      PROCESSING
-                    </span>
-                  </div> */}
                 </div>
               ) : (
                 <div className="relative">
@@ -354,46 +346,21 @@ const VirtualAssitant = () => {
                     alt="AI Speaking"
                     className="w-[40vh] h-25 relative z-10"
                   />
-
-                  {/* Audio wave visualization */}
-                  <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex justify-center gap-1">
-                    {[...Array(15)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-1 bg-gradient-to-t from-cyan-400 via-pink-500 to-purple-400 rounded-full animate-pulse"
-                        style={{
-                          height: `${Math.sin(i * 0.4) * 20 + 25}px`,
-                          animationDelay: `${i * 80}ms`,
-                          animationDuration: "1.2s",
-                        }}
-                      ></div>
-                    ))}
-                  </div>
-
-                  {/* Speaking indicator */}
-                  <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 flex items-center gap-2 px-2 py-1 bg-green-500/20 rounded-full border border-green-500/40 backdrop-blur-sm mt-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span className="text-green-400 text-xs font-medium tracking-wider">
-                      ACTIVE
-                    </span>
-                  </div>
                 </div>
               )}
             </div>
 
             {/* Enhanced response text */}
-            <div className="relative max-w-4xl">
+            <div className="relative m-5  md:max-w-4xl">
               {/* Text background glow */}
               <div className="absolute -inset-4 bg-gradient-to-r from-cyan-400/10 via-pink-500/10 to-purple-500/10 rounded-2xl blur-xl opacity-80"></div>
 
               {/* Text container */}
-              <div className="relative bg-black/30 backdrop-blur-sm rounded-2xl p-4 border border-cyan-400/20">
-                <p className="text-[1.3vmax] text-white text-center px-10 leading-relaxed relative">
+              <div className="relative bg-black/30 backdrop-blur-sm rounded-2xl md:p-4 p-2 border border-cyan-400/20">
+                <p className="md:text-[1.8vmax] text-[15px] text-white text-center px-10 leading-relaxed relative">
                   <span className="bg-gradient-to-r from-cyan-400 via-white to-pink-500 bg-clip-text text-transparent">
                     {prompt}
                   </span>
-                  {/* Typewriter cursor */}
-                  {/* <span className="inline-block w-1 h-6 bg-cyan-400 ml-2 animate-pulse"></span> */}
                 </p>
 
                 {/* Corner accents */}
@@ -406,26 +373,8 @@ const VirtualAssitant = () => {
           </div>
         )}
 
-        {/* Side navigation indicators */}
-        {/* <div className="absolute right-6 top-1/2 transform -translate-y-1/2 space-y-4">
-          {["🎤", "🧠", "⚡"].map((icon, i) => (
-            <div key={i} className="group relative">
-              <div className="w-10 h-10 bg-black/40 border border-cyan-400/30 rounded-full flex items-center justify-center backdrop-blur-sm hover:scale-110 transition-all duration-300 cursor-pointer">
-                <span className="text-lg">{icon}</span>
-              </div>
-              <div className="absolute right-12 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <div className="px-3 py-1 bg-black/80 border border-cyan-400/30 rounded-lg backdrop-blur-sm">
-                  <span className="text-cyan-400 text-xs font-medium">
-                    {["VOICE", "AI", "SPEED"][i]}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}
-
         {/* Custom CSS animations */}
-        <style jsx>{`
+        {/* <style jsx>{`
           @keyframes gridPulse {
             0%,
             100% {
@@ -442,7 +391,7 @@ const VirtualAssitant = () => {
               var(--tw-gradient-stops)
             );
           }
-        `}</style>
+        `}</style> */}
       </div>
     </>
   );

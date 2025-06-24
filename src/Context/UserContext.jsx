@@ -5,21 +5,41 @@ export const dataContext = createContext();
 
 const UserContext = ({ children }) => {
   const [speaking, setSpeaking] = useState(false);
-
   const [prompt, setPrompt] = useState("listening...");
   const [response, setResponse] = useState(false);
   const [speechEnd, setSpeechEnd] = useState(false);
+  const [recognition, setRecognition] = useState(null); // 👈
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (SpeechRecognition) {
+        const recog = new SpeechRecognition();
+        recog.onresult = (e) => {
+          let currentIndex = e.resultIndex;
+          let transcript = e.results[currentIndex][0].transcript;
+          setPrompt(transcript);
+          console.log(transcript);
+          takeCommand(transcript.toLowerCase());
+        };
+        setRecognition(recog); // ✅ set after ready
+      } else {
+        console.warn("Speech Recognition not supported.");
+      }
+    }
+  }, []); // Run once on mount
 
   useEffect(() => {
     if (speechEnd === true) {
       setSpeaking(false);
-      setSpeechEnd(false); // Reset for next speech
+      setSpeechEnd(false);
     }
   }, [speechEnd]);
 
   function speak(text) {
-    console.log("Attempting to speak:", text);
-
+    // console.log("Attempting to speak:", text);
     let text_speak = new SpeechSynthesisUtterance(text);
     text_speak.volume = 1;
     text_speak.rate = 1;
@@ -28,8 +48,8 @@ const UserContext = ({ children }) => {
 
     text_speak.onstart = () => console.log("✓ Speech started");
     text_speak.onend = () => {
-      console.log("✓ Speech ended");
-      setSpeechEnd(true);
+      // console.log("✓ Speech ended");
+      setSpeechEnd(false);
     };
     text_speak.onerror = (e) => console.error("✗ Speech error:", e);
 
@@ -46,34 +66,13 @@ const UserContext = ({ children }) => {
         .join("")
         .replace(/Google/g, "Chakravarthi")
         .replace(/google/g, "Chakravarthi");
-      console.log("AI Response:", text);
+      // console.log("AI Response:", text);
       setPrompt(newText);
-      speak(newText); // Optional: speak the AI response
+      speak(newText);
       setResponse(true);
-      // setTimeout(() => {
-      //   setSpeaking(false);
-      // }, 5000);
-      // {
-      //   if (speechEnd == true) {
-      //     setSpeaking(false);
-      //   }
-      // }
     } catch (error) {
       console.error("Error getting AI response:", error);
     }
-  };
-
-  let speechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-  const recognition = new speechRecognition();
-
-  recognition.onresult = (e) => {
-    let currentIndex = e.resultIndex;
-    let transcript = e.results[currentIndex][0].transcript;
-    setPrompt(transcript);
-    console.log(transcript);
-    // aiResponse(transcript);
-    takeCommand(transcript.toLowerCase());
   };
 
   const takeCommand = (command) => {
@@ -93,7 +92,7 @@ const UserContext = ({ children }) => {
       setResponse(true);
       setPrompt("Opening Instagram...");
     } else if (command.includes("time")) {
-      let time = new Date().toLocaleDateString(undefined, {
+      let time = new Date().toLocaleTimeString("en-IN", {
         hour: "numeric",
         minute: "numeric",
       });
@@ -101,7 +100,7 @@ const UserContext = ({ children }) => {
       setResponse(true);
       setPrompt(time);
     } else if (command.includes("date")) {
-      let date = new Date().toLocaleDateString(undefined, {
+      let date = new Date().toLocaleDateString("en-IN", {
         day: "numeric",
         month: "short",
       });
@@ -124,14 +123,7 @@ const UserContext = ({ children }) => {
     setResponse,
   };
 
-  return (
-    <>
-      <div>
-        <dataContext.Provider value={value}>{children}</dataContext.Provider>
-      </div>
-      ;
-    </>
-  );
+  return <dataContext.Provider value={value}>{children}</dataContext.Provider>;
 };
 
 export default UserContext;
