@@ -49,7 +49,7 @@ const UserContext = ({ children }) => {
     text_speak.onstart = () => console.log("✓ Speech started");
     text_speak.onend = () => {
       // console.log("✓ Speech ended");
-      setSpeechEnd(false);
+      setSpeechEnd(true);
     };
     text_speak.onerror = (e) => console.error("✗ Speech error:", e);
 

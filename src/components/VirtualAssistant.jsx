@@ -22,7 +22,7 @@ const VirtualAssitant = () => {
 
   return (
     <>
-      <div className="w-screen min-h-screen relative overflow-x-hidden flex items-center justify-center flex-col pt-0 pb-5 gap-5 bg-black">
+      <div className="w-screen min-h-screen relative overflow-x-hidden flex items-center justify-center flex-col pt-[40px] pb-5 gap-5 bg-black">
         {/* Advanced Animated Background Layers */}
         <div className="absolute inset-0 overflow-x-hidden pointer-events-none">
           {/* Neural network grid */}
@@ -173,7 +173,7 @@ const VirtualAssitant = () => {
         </div>
 
         {/* Revolutionary Avatar Enhancement */}
-        <div className="relative -mt-10 sm:-mt-14 md:-mt-20">
+        <div className="relative mt-[10px]">
           {/* Outer rotating energy ring */}
           <div
             className="absolute -inset-10 border-2 border-transparent bg-gradient-to-r from-cyan-400 via-transparent to-pink-500 rounded-full animate-spin opacity-60 "
@@ -318,10 +318,10 @@ const VirtualAssitant = () => {
               {!response ? (
                 <div className="relative">
                   {/* Enhanced loading container */}
-                  <div className="absolute -inset-8 bg-gradient-radial from-cyan-400/20 via-pink-500/10 to-transparent rounded-full blur-2xl animate-pulse"></div>
+                  <div className="absolute  -inset-4 bg-gradient-radial from-cyan-400/20 via-pink-500/10 to-transparent rounded-full blur-2xl animate-pulse"></div>
 
                   {/* Rotating rings around loading */}
-                  <div className="absolute -inset-4 border-2 border-transparent border-t-cyan-400 rounded-full animate-spin"></div>
+                  <div className="absolute -inset-2 border-2 border-transparent border-t-cyan-400 rounded-full animate-spin"></div>
                   <div
                     className="absolute -inset-2 border border-transparent border-r-pink-500 rounded-full animate-spin"
                     style={{
